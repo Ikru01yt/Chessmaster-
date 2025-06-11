@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
-    <title>Mobile Chess Master - Touch Optimized</title>
+    <title>Chess Game - High Revenue Edition</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -23,15 +23,15 @@
             min-height: 100vh;
             overflow-x: hidden;
             touch-action: manipulation;
-            position: fixed;
+            position: relative;
             width: 100%;
-            height: 100%;
+            padding-bottom: 150px;
         }
 
         .chess-container {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh;
             padding: 8px;
             box-sizing: border-box;
         }
@@ -376,6 +376,179 @@
             left: 2px;
         }
 
+        /* Ad Containers */
+        .ad-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 8px;
+            margin: 8px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .bottom-ad-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid #ffd700;
+            z-index: 1000;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .bottom-ad-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .rewarded-ad-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .rewarded-ad-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .rewarded-ad-content {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255, 215, 0, 0.8);
+            max-width: 400px;
+            width: 90%;
+            animation: modalBounce 0.5s ease;
+        }
+
+        .reward-icon {
+            font-size: 48px;
+            color: #ffd700;
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .reward-button {
+            background: linear-gradient(145deg, #ffd700, #ffb300);
+            color: #333;
+            border: none;
+            border-radius: 20px;
+            padding: 15px 25px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            cursor: pointer;
+            margin: 10px 5px;
+            text-transform: uppercase;
+        }
+
+        .reward-button:hover, .reward-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .ad-timer {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ad-timer.show {
+            opacity: 1;
+        }
+
+        .high-cpm-indicator {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
         /* Landscape orientation adjustments */
         @media screen and (orientation: landscape) and (max-height: 500px) {
             .chess-container {
@@ -405,6 +578,10 @@
                 height: min(85vh, 85vw);
                 max-width: 360px;
                 max-height: 360px;
+            }
+
+            .bottom-ad-banner {
+                min-height: 100px;
             }
         }
 
@@ -437,6 +614,10 @@
                 padding: 12px;
                 font-size: 24px;
             }
+
+            .bottom-ad-banner {
+                min-height: 100px;
+            }
         }
 
         /* Disable text selection and context menus */
@@ -457,6 +638,12 @@
     </style>
 </head>
 <body>
+    <!-- Ad Timer -->
+    <div id="adTimer" class="ad-timer">
+        <i class="fas fa-clock"></i>
+        <span id="timerText">Ads starting in 45s</span>
+    </div>
+
     <!-- Notifications -->
     <div id="notification" class="notification">
         <i class="fas fa-crown"></i>
@@ -503,6 +690,31 @@
         </div>
     </div>
 
+    <!-- Rewarded Ad Modal -->
+    <div id="rewardedAdModal" class="rewarded-ad-modal">
+        <div class="rewarded-ad-content">
+            <div class="reward-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <h2 class="text-white text-xl font-bold mb-3">🎁 Get Bonus Points!</h2>
+            <p class="text-white text-sm mb-4">Watch a quick ad to earn bonus points and unlock premium features!</p>
+            <div class="ad-container" style="margin: 15px 0; min-height: 100px;">
+                <div class="high-cpm-indicator">HIGH CPM</div>
+                <div id="rewardedAdContent" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-weight: 600;">
+                    Loading Premium Ad...
+                </div>
+                <div class="ad-label">REWARDED</div>
+            </div>
+            <button onclick="closeRewardedAd()" class="reward-button">
+                <i class="fas fa-coins"></i>
+                CLAIM REWARD (+100 Pts)
+            </button>
+            <button onclick="closeRewardedAd()" class="control-button secondary" style="margin-top: 10px;">
+                Skip Ad
+            </button>
+        </div>
+    </div>
+
     <!-- Thinking Indicator -->
     <div id="thinkingIndicator" class="thinking-indicator">
         <i class="fas fa-brain mr-2"></i>
@@ -510,8 +722,16 @@
     </div>
 
     <div class="chess-container">
-        <!-- Header -->
+        <!-- Header with Top Ad -->
         <div class="game-header">
+            <div class="ad-container" id="topAdContainer" style="display: none; margin-bottom: 12px;">
+                <div class="high-cpm-indicator">HIGH CPM</div>
+                <div id="topAdContent" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-weight: 600;">
+                    Premium Ad Loading...
+                </div>
+                <div class="ad-label">SPONSORED</div>
+            </div>
+            
             <div class="score-display">
                 <div class="player-score">
                     <div class="text-sm opacity-75">White</div>
@@ -535,8 +755,17 @@
             </div>
         </div>
 
-        <!-- Controls -->
+        <!-- Controls with Middle Ad -->
         <div class="game-controls">
+            <!-- Middle Ad Container -->
+            <div class="ad-container" id="middleAdContainer" style="display: none; margin-bottom: 12px;">
+                <div class="high-cpm-indicator">HIGH CPM</div>
+                <div id="middleAdContent" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-weight: 600;">
+                    Loading High-Revenue Ad...
+                </div>
+                <div class="ad-label">PREMIUM</div>
+            </div>
+
             <!-- Game Mode -->
             <div class="mode-selector">
                 <button id="vsPlayerBtn" class="control-button secondary" onclick="game.setGameMode('player')">
@@ -576,7 +805,23 @@
                     Undo
                 </button>
             </div>
+
+            <!-- Reward Ad Button -->
+            <button class="reward-button" onclick="showRewardedAd()" style="width: 100%; margin-top: 12px;">
+                <i class="fas fa-gift"></i>
+                Watch Ad for Bonus Points! (+100 Pts)
+            </button>
         </div>
+    </div>
+
+    <!-- Bottom Permanent Ad Banner -->
+    <div class="bottom-ad-banner" id="bottomAdBanner" style="display: none;">
+        <div class="high-cpm-indicator">MAXIMUM CPM</div>
+        <div id="bottomAdContent" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #333; font-weight: 700; text-align: center;">
+            🚀 Premium High-Revenue Ad Space<br>
+            <small style="opacity: 0.7;">Loading maximum CPM content...</small>
+        </div>
+        <div class="ad-label">PERMANENT</div>
     </div>
 
     <script>
@@ -593,7 +838,7 @@
                 this.lastMove = null;
                 this.isAIThinking = false;
                 this.scores = { white: 0, black: 0 };
-                this.pendingPromotion = null; // For storing promotion moves
+                this.pendingPromotion = null;
                 
                 this.squareSize = 0;
                 this.boardElement = document.getElementById('chessBoard');
@@ -1424,8 +1669,158 @@
             }
         }
 
-        // Initialize the game
+        // Ad Management System
+        class AdManager {
+            constructor() {
+                this.adTimer = 45; // 45 seconds delay
+                this.adInterval = null;
+                this.continuousAdInterval = null;
+                this.adStarted = false;
+                this.init();
+            }
+
+            init() {
+                this.startAdTimer();
+                this.loadHighCPMAds();
+            }
+
+            startAdTimer() {
+                const timerElement = document.getElementById('adTimer');
+                const timerText = document.getElementById('timerText');
+                
+                timerElement.classList.add('show');
+                
+                this.adInterval = setInterval(() => {
+                    if (this.adTimer > 0) {
+                        timerText.textContent = `Ads starting in ${this.adTimer}s`;
+                        this.adTimer--;
+                    } else {
+                        this.startAds();
+                        clearInterval(this.adInterval);
+                        timerElement.classList.remove('show');
+                    }
+                }, 1000);
+            }
+
+            startAds() {
+                this.adStarted = true;
+                this.showAllAds();
+                this.startContinuousAdRefresh();
+                this.loadRevenueOptimizedContent();
+            }
+
+            showAllAds() {
+                // Show all ad containers
+                document.getElementById('topAdContainer').style.display = 'block';
+                document.getElementById('middleAdContainer').style.display = 'block';
+                document.getElementById('bottomAdBanner').style.display = 'flex';
+                
+                // Load your high-revenue ad script
+                this.loadAdScript();
+            }
+
+            loadAdScript() {
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = '//pl26879014.profitableratecpm.com/0c/b0/b8/0cb0b8765a981ee965dff69bfb72d0fa.js';
+                script.async = true;
+                document.head.appendChild(script);
+                
+                // Optimize ad loading for maximum revenue
+                script.onload = () => {
+                    this.optimizeAdPlacements();
+                };
+            }
+
+            optimizeAdPlacements() {
+                // Update ad content to show they're loaded
+                document.getElementById('topAdContent').innerHTML = 
+                    `<div style="color: #333; font-weight: 700; text-align: center;">
+                        ✅ High-CPM Ad Loaded<br>
+                        <small>Premium Revenue Stream Active</small>
+                    </div>`;
+                
+                document.getElementById('middleAdContent').innerHTML = 
+                    `<div style="color: #333; font-weight: 700; text-align: center;">
+                        💰 Maximum Revenue Ad<br>
+                        <small>Optimized for highest CPM</small>
+                    </div>`;
+                
+                document.getElementById('bottomAdContent').innerHTML = 
+                    `<div style="color: #333; font-weight: 700; text-align: center;">
+                        🚀 Permanent High-Revenue Banner<br>
+                        <small>Continuous monetization active</small>
+                    </div>`;
+            }
+
+            startContinuousAdRefresh() {
+                // Refresh ads every 45 seconds for maximum revenue
+                this.continuousAdInterval = setInterval(() => {
+                    this.refreshAds();
+                }, 45000);
+            }
+
+            refreshAds() {
+                if (!this.adStarted) return;
+                
+                // Reload the ad script for fresh ad content
+                this.loadAdScript();
+                
+                // Show refresh animation
+                const containers = ['topAdContainer', 'middleAdContainer', 'bottomAdBanner'];
+                containers.forEach(id => {
+                    const container = document.getElementById(id);
+                    if (container) {
+                        container.style.opacity = '0.7';
+                        setTimeout(() => {
+                            container.style.opacity = '1';
+                        }, 500);
+                    }
+                });
+            }
+
+            loadRevenueOptimizedContent() {
+                // Add additional revenue optimization
+                setTimeout(() => {
+                    this.showRandomRewardedAd();
+                }, 30000); // Show rewarded ad after 30 seconds of gameplay
+            }
+
+            showRandomRewardedAd() {
+                if (Math.random() > 0.3) { // 70% chance to show rewarded ad
+                    showRewardedAd();
+                }
+            }
+        }
+
+        // Rewarded Ad Functions
+        function showRewardedAd() {
+            document.getElementById('rewardedAdModal').classList.add('show');
+            
+            // Load ad content in rewarded ad
+            setTimeout(() => {
+                document.getElementById('rewardedAdContent').innerHTML = 
+                    `<div style="color: #333; font-weight: 700; text-align: center;">
+                        🎯 Premium Rewarded Ad<br>
+                        <small>High-value engagement content</small>
+                    </div>`;
+            }, 1000);
+        }
+
+        function closeRewardedAd() {
+            document.getElementById('rewardedAdModal').classList.remove('show');
+            
+            // Add points to user (simulated)
+            if (game) {
+                game.scores.white += 1; // Bonus points
+                game.updateDisplay();
+                game.showNotification('🎉 Bonus points earned! (+100 Pts)', 'promotion');
+            }
+        }
+
+        // Initialize everything
         let game;
+        let adManager;
         
         window.addEventListener('load', () => {
             // Initialize audio context on first user interaction
@@ -1436,6 +1831,7 @@
             }, { once: true });
             
             game = new MobileChessGame();
+            adManager = new AdManager();
             window.game = game; // Make it globally accessible
         });
 
@@ -1456,7 +1852,5 @@
             }
         }, { passive: false });
     </script>
-    
-    <script type='text/javascript' src='//matloomreconcile.com/c4/d3/5b/c4d35b8d704fa097d4e16689651b879e.js'></script>
 </body>
 </html>
